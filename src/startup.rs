@@ -2,8 +2,6 @@ use std::net::TcpListener;
 
 use crate::*;
 
-
-
 pub fn run(listener: TcpListener) -> std::io::Result<Server> {
     let server = HttpServer::new(|| {
         App::new()

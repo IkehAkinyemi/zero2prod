@@ -47,7 +47,10 @@ async fn subscribe_returns_a_200_for_valid_form_data() {
     println!("{}", format!("{}/subscriptions", &app_address));
 
     assert_eq!(200, response.status().as_u16());
-    let saved = sqlx::query!("SELECT email, name FROM subscriptions",).fetch_one(&mut connection).await.expect("Failed to fetch saved subscription.");
+    let saved = sqlx::query!("SELECT email, name FROM subscriptions",)
+        .fetch_one(&mut connection)
+        .await
+        .expect("Failed to fetch saved subscription.");
     assert_eq!(saved.email, "ursula_le_guin@gmail.com");
     assert_eq!(saved.name, "le guin");
 }
