@@ -1,4 +1,4 @@
-use sqlx::{PgConnection, PgPool, Connection, Executor};
+use sqlx::{Connection, Executor, PgConnection, PgPool};
 use std::net::TcpListener;
 use uuid::Uuid;
 use zero2prod::{
@@ -35,7 +35,7 @@ pub async fn configure_database(config: &DatabaseSettings) -> PgPool {
         .execute(format!(r#"CREATE DATABASE "{}";"#, config.database_name).as_str())
         .await
         .expect("Failed to create database");
-        
+
     // Migrate database
     let connection_pool = PgPool::connect(&config.connection_string())
         .await
